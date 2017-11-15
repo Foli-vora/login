@@ -14,6 +14,15 @@
 <script>
   var user = sessionStorage.getItem('username')
   $('h2').html(user + '登录成功')
+
+  // 获取所有注册用户信息
+  var users = {};
+  $.get('http://dao.sinicnet.cn:5000/getUser',{},function (res) {
+    console.log(res)
+    users = res.data
+  })
+
+
   $('button').click(function () {
     sessionStorage.setItem('username','')
     $.get('http://dao.sinicnet.cn:5000/logout')
