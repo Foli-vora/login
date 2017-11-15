@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>登录</title>
+</head>
+<body>
+
+用户名：<input type="text" id="username"><br><br>
+密码： <input type="password" id="password"><br><br>
+<button id="login">登录</button>
+
+</body>
+<script src="jquery-1.12.4.js"></script>
+<script>
+  var username = '';
+  var password = '';
+
+  // 用户名
+  $('#username').blur(function () {
+    username = $(this).val().trim()
+  })
+
+  // 密码
+  $('#password').blur(function () {
+    password = $(this).val().trim()
+  })
+
+  $('#login').click(function () {
+    $.post('http://dao.sinicnet.cn:5000/login',
+      {name: username,password: password},
+      function (data) {
+        console.log(data)
+        if(data.code == 200) {
+          alert('登录成功')
+          sessionStorage.setItem('username',username)
+          location.href = 'http://localhost:63342/songyu/logout.html'
+        } else {
+          alert('请注册之后再登录')
+        }
+      }
+    )
+  })
+</script>
+</html>

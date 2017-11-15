@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>退出登录</title>
+</head>
+<body>
+
+<h2>恭喜您，登录成功</h2>
+<button>退出</button>
+
+</body>
+<script src="jquery-1.12.4.js"></script>
+<script>
+  var user = sessionStorage.getItem('username')
+  $('h2').html(user + '登录成功')
+  $('button').click(function () {
+    sessionStorage.setItem('username','')
+    $.get('http://dao.sinicnet.cn:5000/logout')
+    location.href = 'http://localhost:63342/songyu/login.html'
+  })
+</script>
+</html>
